@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  php:
+    build: php-fpm
+    ports:
+      - '9002:9000'
+    volumes:
+      - ../application:/var/www/application:cached
+  nginx:
+    build: nginx
+    ports:
+      - '8080:80'
+    links:
+      - php
+    volumes_from:
+      - php
